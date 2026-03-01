@@ -125,6 +125,13 @@ export function LandingPage() {
                   See How It Works
                   <ChevronDown className="w-5 h-5" />
                 </button>
+                <Link
+                  to="/brochure"
+                  className="border-2 border-[var(--neutral-300)] text-[var(--neutral-700)] px-8 py-4 rounded-lg hover:bg-[var(--neutral-50)] transition-colors font-medium text-lg flex items-center gap-2"
+                >
+                  View Pitch Deck
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
               </div>
             </div>
             <div className="space-y-4">
@@ -1272,6 +1279,13 @@ export function LandingPage() {
               Request Demo
               <ArrowRight className="w-5 h-5" />
             </button>
+            <Link
+              to="/brochure"
+              className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-white/10 transition-colors font-bold text-lg flex items-center gap-2"
+            >
+              View Pitch Deck
+              <ArrowRight className="w-5 h-5" />
+            </Link>
             <button className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-white/10 transition-colors font-bold text-lg flex items-center gap-2">
               Download Pilot Playbook
               <FileText className="w-5 h-5" />
@@ -1317,6 +1331,11 @@ export function LandingPage() {
                 <li>
                   <Link to="/staff" className="hover:text-white transition-colors">
                     Staff Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/brochure" className="hover:text-white transition-colors">
+                    Pitch Deck
                   </Link>
                 </li>
                 <li>Features</li>
