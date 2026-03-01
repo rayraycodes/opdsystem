@@ -87,10 +87,13 @@ export function LandingPage() {
                 high-volume South Asian OPDs.
               </p>
               <div className="flex flex-wrap gap-4">
-                <button className="bg-primary text-white px-8 py-4 rounded-lg hover:bg-[var(--healing-teal-dark)] transition-colors font-medium text-lg flex items-center gap-2">
-                  Request Demo
+                <Link
+                  to="/patient"
+                  className="bg-primary text-white px-8 py-4 rounded-lg hover:bg-[var(--healing-teal-dark)] transition-colors font-medium text-lg flex items-center gap-2"
+                >
+                  View Demo
                   <ArrowRight className="w-5 h-5" />
-                </button>
+                </Link>
                 <button
                   onClick={() => scrollToSection("how-it-works")}
                   className="bg-white border-2 border-primary text-primary px-8 py-4 rounded-lg hover:bg-primary/5 transition-colors font-medium text-lg flex items-center gap-2"
