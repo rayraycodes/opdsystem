@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { RequestDemoForm } from "../components/RequestDemoForm";
 import {
   Heart,
   Users,
@@ -23,12 +24,32 @@ import {
   ChevronDown,
   Building2,
   Phone,
+  Lock,
+  Key,
+  Database,
+  UserCheck,
+  ShieldCheck,
+  Fingerprint,
+  Scale,
+  ScrollText,
+  Share2,
+  Settings,
 } from "lucide-react";
 import { Link } from "react-router";
 
 export function LandingPage() {
   const [activeMode, setActiveMode] = useState<"normal" | "elder">("normal");
   const [showQueueDemo, setShowQueueDemo] = useState(false);
+  const [showRequestForm, setShowRequestForm] = useState(false);
+
+  // Close modal on escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setShowRequestForm(false);
+    };
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, []);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -57,17 +78,20 @@ export function LandingPage() {
               <button onClick={() => scrollToSection("features")} className="hover:text-primary transition-colors">
                 Features
               </button>
-              <button onClick={() => scrollToSection("accessibility")} className="hover:text-primary transition-colors">
-                Accessibility
-              </button>
               <button onClick={() => scrollToSection("impact")} className="hover:text-primary transition-colors">
                 Impact
+              </button>
+              <button onClick={() => scrollToSection("health-data")} className="hover:text-primary transition-colors">
+                Data Protection
               </button>
               <button onClick={() => scrollToSection("implementation")} className="hover:text-primary transition-colors">
                 Implementation
               </button>
             </div>
-            <button className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-[var(--healing-teal-dark)] transition-colors font-medium">
+            <button
+              onClick={() => setShowRequestForm(true)}
+              className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-[var(--healing-teal-dark)] transition-colors font-medium"
+            >
               Request Demo
             </button>
           </div>
@@ -698,6 +722,350 @@ export function LandingPage() {
         </div>
       </section>
 
+      {/* Health Data Sharing & Protection Section */}
+      <section id="health-data" className="py-20 bg-gradient-to-br from-[var(--info)]/5 via-white to-primary/5">
+        <div className="max-w-[1120px] mx-auto px-6">
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Shield className="w-10 h-10 text-primary" />
+              <h2 className="text-4xl font-bold text-[var(--foreground)]">Health Data Sharing & Protection</h2>
+            </div>
+            <p className="text-xl text-[var(--neutral-700)] max-w-3xl mx-auto">
+              Your health data belongs to you. We follow international standards and regional regulations to ensure 
+              privacy, consent-driven sharing, and complete transparency.
+            </p>
+          </div>
+
+          {/* Regulatory Compliance Badges */}
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
+            <div className="flex items-center gap-2 bg-white rounded-lg px-4 py-2 border border-primary/20 shadow-sm">
+              <ShieldCheck className="w-5 h-5 text-primary" />
+              <span className="font-medium">DPDPA 2023 (India)</span>
+            </div>
+            <div className="flex items-center gap-2 bg-white rounded-lg px-4 py-2 border border-primary/20 shadow-sm">
+              <ShieldCheck className="w-5 h-5 text-primary" />
+              <span className="font-medium">Nepal Privacy Act 2025</span>
+            </div>
+            <div className="flex items-center gap-2 bg-white rounded-lg px-4 py-2 border border-primary/20 shadow-sm">
+              <ShieldCheck className="w-5 h-5 text-secondary" />
+              <span className="font-medium">HIPAA Aligned</span>
+            </div>
+            <div className="flex items-center gap-2 bg-white rounded-lg px-4 py-2 border border-primary/20 shadow-sm">
+              <ShieldCheck className="w-5 h-5 text-[var(--info)]" />
+              <span className="font-medium">FHIR R4 Compatible</span>
+            </div>
+            <div className="flex items-center gap-2 bg-white rounded-lg px-4 py-2 border border-primary/20 shadow-sm">
+              <ShieldCheck className="w-5 h-5 text-[var(--info)]" />
+              <span className="font-medium">HL7 Consent Standard</span>
+            </div>
+          </div>
+
+          {/* Three Pillars */}
+          <div className="grid lg:grid-cols-3 gap-8 mb-12">
+            {/* Pillar 1: Patient Rights */}
+            <div className="bg-white rounded-xl p-8 border border-[var(--neutral-200)] shadow-sm">
+              <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                <UserCheck className="w-7 h-7 text-primary" />
+              </div>
+              <h3 className="text-2xl font-bold mb-4">Patient Rights First</h3>
+              <p className="text-[var(--neutral-700)] mb-6">
+                Full control over your health information with rights guaranteed by law.
+              </p>
+              <ul className="space-y-3">
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-[var(--neutral-700)]">
+                    <strong>Right to Access:</strong> View all your health records anytime
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-[var(--neutral-700)]">
+                    <strong>Right to Portability:</strong> Export data in standard formats (FHIR)
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-[var(--neutral-700)]">
+                    <strong>Right to Rectification:</strong> Correct inaccurate information
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-[var(--neutral-700)]">
+                    <strong>Right to Erasure:</strong> Request deletion of non-essential data
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-[var(--neutral-700)]">
+                    <strong>Right to Restrict:</strong> Limit how your data is used
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Pillar 2: Consent Management */}
+            <div className="bg-white rounded-xl p-8 border border-[var(--neutral-200)] shadow-sm">
+              <div className="w-14 h-14 bg-secondary/10 rounded-full flex items-center justify-center mb-6">
+                <ScrollText className="w-7 h-7 text-secondary" />
+              </div>
+              <h3 className="text-2xl font-bold mb-4">Granular Consent Control</h3>
+              <p className="text-[var(--neutral-700)] mb-6">
+                You decide exactly what data is shared, with whom, and for how long.
+              </p>
+              <ul className="space-y-3">
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
+                  <span className="text-[var(--neutral-700)]">
+                    <strong>Category-Based:</strong> Separate consents for treatment, emergency, research
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
+                  <span className="text-[var(--neutral-700)]">
+                    <strong>Scope Selection:</strong> Choose specific data types to share
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
+                  <span className="text-[var(--neutral-700)]">
+                    <strong>Time-Limited:</strong> Set expiration dates for consent
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
+                  <span className="text-[var(--neutral-700)]">
+                    <strong>Easy Revocation:</strong> Withdraw consent anytime, instantly
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
+                  <span className="text-[var(--neutral-700)]">
+                    <strong>Purpose-Bound:</strong> Data used only for stated purposes
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Pillar 3: Security & Transparency */}
+            <div className="bg-white rounded-xl p-8 border border-[var(--neutral-200)] shadow-sm">
+              <div className="w-14 h-14 bg-[var(--info)]/10 rounded-full flex items-center justify-center mb-6">
+                <Lock className="w-7 h-7 text-[var(--info)]" />
+              </div>
+              <h3 className="text-2xl font-bold mb-4">Enterprise-Grade Security</h3>
+              <p className="text-[var(--neutral-700)] mb-6">
+                Your data protected with the highest security standards.
+              </p>
+              <ul className="space-y-3">
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-[var(--info)] flex-shrink-0 mt-0.5" />
+                  <span className="text-[var(--neutral-700)]">
+                    <strong>Encryption:</strong> AES-256 at rest, TLS 1.3 in transit
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-[var(--info)] flex-shrink-0 mt-0.5" />
+                  <span className="text-[var(--neutral-700)]">
+                    <strong>Access Logs:</strong> Complete audit trail of who accessed your data
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-[var(--info)] flex-shrink-0 mt-0.5" />
+                  <span className="text-[var(--neutral-700)]">
+                    <strong>MFA Required:</strong> Multi-factor authentication for all staff
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-[var(--info)] flex-shrink-0 mt-0.5" />
+                  <span className="text-[var(--neutral-700)]">
+                    <strong>Regular Audits:</strong> Biannual security assessments
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-[var(--info)] flex-shrink-0 mt-0.5" />
+                  <span className="text-[var(--neutral-700)]">
+                    <strong>Breach Protocol:</strong> 72-hour notification if incidents occur
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Data Sharing Flow */}
+          <div className="bg-white rounded-xl p-8 border border-[var(--neutral-200)] shadow-sm mb-12">
+            <h3 className="text-2xl font-bold mb-6 text-center">How Health Data Sharing Works</h3>
+            <div className="grid md:grid-cols-5 gap-4">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Fingerprint className="w-8 h-8 text-white" />
+                </div>
+                <h4 className="font-bold mb-1">1. Identify</h4>
+                <p className="text-sm text-[var(--neutral-700)]">Verify patient identity via ABHA/Health ID</p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-3">
+                  <ScrollText className="w-8 h-8 text-white" />
+                </div>
+                <h4 className="font-bold mb-1">2. Request</h4>
+                <p className="text-sm text-[var(--neutral-700)]">Provider requests specific data categories</p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-3">
+                  <UserCheck className="w-8 h-8 text-white" />
+                </div>
+                <h4 className="font-bold mb-1">3. Consent</h4>
+                <p className="text-sm text-[var(--neutral-700)]">Patient reviews and grants/denies consent</p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Share2 className="w-8 h-8 text-white" />
+                </div>
+                <h4 className="font-bold mb-1">4. Share</h4>
+                <p className="text-sm text-[var(--neutral-700)]">Encrypted data shared securely</p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-3">
+                  <FileText className="w-8 h-8 text-white" />
+                </div>
+                <h4 className="font-bold mb-1">5. Audit</h4>
+                <p className="text-sm text-[var(--neutral-700)]">Access logged for transparency</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Regional Compliance Details */}
+          <div className="grid lg:grid-cols-2 gap-8 mb-12">
+            {/* India ABDM/DPDPA */}
+            <div className="bg-gradient-to-br from-[#FF9933]/10 to-[#138808]/10 rounded-xl p-8 border border-[#FF9933]/20">
+              <div className="flex items-center gap-3 mb-4">
+                <Globe className="w-8 h-8 text-[#FF9933]" />
+                <h3 className="text-2xl font-bold">India: ABDM & DPDPA</h3>
+              </div>
+              <p className="text-[var(--neutral-700)] mb-6">
+                Full compliance with India's Ayushman Bharat Digital Mission and Digital Personal Data Protection Act 2023.
+              </p>
+              <div className="space-y-4">
+                <div className="bg-white/80 rounded-lg p-4">
+                  <h4 className="font-bold flex items-center gap-2 mb-2">
+                    <Key className="w-5 h-5 text-[#FF9933]" />
+                    ABHA Integration
+                  </h4>
+                  <ul className="text-sm text-[var(--neutral-700)] space-y-1 ml-7">
+                    <li>• Ayushman Bharat Health Account linking</li>
+                    <li>• ABDM Consent Manager integration</li>
+                    <li>• Health Information Exchange ready</li>
+                    <li>• QR-based patient verification</li>
+                  </ul>
+                </div>
+                <div className="bg-white/80 rounded-lg p-4">
+                  <h4 className="font-bold flex items-center gap-2 mb-2">
+                    <Scale className="w-5 h-5 text-[#138808]" />
+                    DPDPA Compliance
+                  </h4>
+                  <ul className="text-sm text-[var(--neutral-700)] space-y-1 ml-7">
+                    <li>• Data Fiduciary obligations fulfilled</li>
+                    <li>• Consent Manager registration (Nov 2026)</li>
+                    <li>• 7-year consent record retention</li>
+                    <li>• Up to ₹250 crore penalty protection</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Nepal */}
+            <div className="bg-gradient-to-br from-[#DC143C]/10 to-[#003893]/10 rounded-xl p-8 border border-[#DC143C]/20">
+              <div className="flex items-center gap-3 mb-4">
+                <Globe className="w-8 h-8 text-[#DC143C]" />
+                <h3 className="text-2xl font-bold">Nepal: Privacy Act 2025</h3>
+              </div>
+              <p className="text-[var(--neutral-700)] mb-6">
+                Aligned with Nepal's Digital Privacy and Data Protection Act 2082 (2025) and existing privacy framework.
+              </p>
+              <div className="space-y-4">
+                <div className="bg-white/80 rounded-lg p-4">
+                  <h4 className="font-bold flex items-center gap-2 mb-2">
+                    <Key className="w-5 h-5 text-[#DC143C]" />
+                    Nepal Health ID Ready
+                  </h4>
+                  <ul className="text-sm text-[var(--neutral-700)] space-y-1 ml-7">
+                    <li>• Pluggable Health ID architecture</li>
+                    <li>• Master Patient Index (MPI) matching</li>
+                    <li>• Ministry of Health integration ready</li>
+                    <li>• EMR interoperability support</li>
+                  </ul>
+                </div>
+                <div className="bg-white/80 rounded-lg p-4">
+                  <h4 className="font-bold flex items-center gap-2 mb-2">
+                    <Scale className="w-5 h-5 text-[#003893]" />
+                    Nepal Privacy Compliance
+                  </h4>
+                  <ul className="text-sm text-[var(--neutral-700)] space-y-1 ml-7">
+                    <li>• Right to access, rectification, deletion</li>
+                    <li>• 72-hour breach notification</li>
+                    <li>• Data Protection Authority registration</li>
+                    <li>• Data localization provisions met</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* International Standards */}
+          <div className="bg-white rounded-xl p-8 border border-[var(--neutral-200)] shadow-sm">
+            <h3 className="text-2xl font-bold mb-6 text-center">Built on International Healthcare Standards</h3>
+            <div className="grid md:grid-cols-4 gap-6">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-[var(--info)]/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Database className="w-8 h-8 text-[var(--info)]" />
+                </div>
+                <h4 className="font-bold mb-2">FHIR R4</h4>
+                <p className="text-sm text-[var(--neutral-700)]">
+                  Fast Healthcare Interoperability Resources for seamless data exchange
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <FileText className="w-8 h-8 text-primary" />
+                </div>
+                <h4 className="font-bold mb-2">HL7 Consent</h4>
+                <p className="text-sm text-[var(--neutral-700)]">
+                  Industry-standard consent resource model for healthcare permissions
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Shield className="w-8 h-8 text-secondary" />
+                </div>
+                <h4 className="font-bold mb-2">HIPAA Aligned</h4>
+                <p className="text-sm text-[var(--neutral-700)]">
+                  Security practices aligned with US healthcare privacy standards
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-[var(--success)]/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Settings className="w-8 h-8 text-[var(--success)]" />
+                </div>
+                <h4 className="font-bold mb-2">IHE Profiles</h4>
+                <p className="text-sm text-[var(--neutral-700)]">
+                  Integrating the Healthcare Enterprise for interoperability
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Trust Message */}
+          <div className="mt-12 text-center">
+            <div className="inline-flex items-center gap-3 bg-primary/10 rounded-full px-6 py-3">
+              <Shield className="w-6 h-6 text-primary" />
+              <span className="font-medium text-primary">
+                Your health data is encrypted, consent-controlled, and never sold to third parties.
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Integration & Trust */}
       <section id="integrations" className="py-20 bg-[var(--neutral-50)]">
         <div className="max-w-[1120px] mx-auto px-6">
@@ -897,7 +1265,10 @@ export function LandingPage() {
             Join hospitals across South Asia bringing calm, clarity, and dignity to high-volume outpatient care.
           </p>
           <div className="flex flex-wrap justify-center gap-4 mb-6">
-            <button className="bg-white text-primary px-8 py-4 rounded-lg hover:bg-[var(--neutral-50)] transition-colors font-bold text-lg flex items-center gap-2">
+            <button
+              onClick={() => setShowRequestForm(true)}
+              className="bg-white text-primary px-8 py-4 rounded-lg hover:bg-[var(--neutral-50)] transition-colors font-bold text-lg flex items-center gap-2"
+            >
               Request Demo
               <ArrowRight className="w-5 h-5" />
             </button>
@@ -914,10 +1285,10 @@ export function LandingPage() {
               <Phone className="w-4 h-4" />
               <span>+977-1-5522266</span>
             </div>
-            <div className="flex items-center gap-2">
+            <a href="mailto:reganmaharjann@gmail.com" className="flex items-center gap-2 hover:underline">
               <Globe className="w-4 h-4" />
-              <span>demo@patanhospital.org.np</span>
-            </div>
+              <span>reganmaharjann@gmail.com</span>
+            </a>
           </div>
         </div>
       </section>
@@ -971,11 +1342,36 @@ export function LandingPage() {
               </ul>
             </div>
           </div>
-          <div className="border-t border-[var(--neutral-700)] pt-8 text-sm text-[var(--neutral-400)] text-center">
-            © 2026 Patan Hospital Queue Management System. Built with dignity, clarity, and accessibility for all.
+          <div className="border-t border-[var(--neutral-700)] pt-8 text-sm text-[var(--neutral-400)]">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+              <p>© 2026 OPD Queue Management System. Built with dignity, clarity, and accessibility for all.</p>
+              <div className="flex items-center gap-2">
+                <Heart className="w-4 h-4 text-primary" />
+                <span>
+                  Created by a <strong className="text-white">Nepalese</strong>
+                </span>
+                <span className="mx-2">|</span>
+                <a href="mailto:reganmaharjann@gmail.com" className="text-primary hover:underline">
+                  reganmaharjann@gmail.com
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
+
+      {/* Request Demo Modal */}
+      {showRequestForm && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={() => setShowRequestForm(false)}
+          />
+          <div className="relative z-10 w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+            <RequestDemoForm language="en" onClose={() => setShowRequestForm(false)} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

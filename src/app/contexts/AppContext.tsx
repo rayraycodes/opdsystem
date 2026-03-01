@@ -8,6 +8,15 @@ interface AccessibilitySettings {
   voiceGuidance: boolean;
 }
 
+interface HealthDataConsent {
+  treatmentConsent: boolean;
+  emergencyAccessConsent: boolean;
+  dataSharingConsent: boolean;
+  researchConsent: boolean;
+  consentDate?: Date;
+  consentVersion?: string;
+}
+
 interface PatientProfile {
   id: string;
   name: string;
@@ -15,6 +24,10 @@ interface PatientProfile {
   gender: string;
   phone: string;
   abhaId?: string;
+  nepalHealthId?: string;
+  healthDataConsent?: HealthDataConsent;
+  dataRetentionYears?: number;
+  preferredLanguage?: "en" | "hi" | "ne";
 }
 
 interface AppContextType {
