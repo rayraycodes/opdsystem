@@ -8,6 +8,7 @@ import { QueueTrackingScreen } from "./screens/QueueTrackingScreen";
 import { StaffDashboard } from "./screens/StaffDashboard";
 import { DesignSystemShowcase } from "./components/DesignSystemShowcase";
 import { LandingPage } from "./screens/LandingPage";
+import Brochure from "../Brochure";
 
 export const router = createBrowserRouter(
   [
@@ -23,6 +24,7 @@ export const router = createBrowserRouter(
         { path: "queue/:tokenId", Component: QueueTrackingScreen },
         { path: "staff", Component: StaffDashboard },
         { path: "design-system", Component: DesignSystemShowcase },
+        { path: "brochure", Component: Brochure },
       ],
     },
   ],
