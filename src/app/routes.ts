@@ -27,6 +27,6 @@ export const router = createBrowserRouter(
     },
   ],
   {
-    basename: "/Opdsystem",
+    basename: "/opdsystem",
   }
 );
